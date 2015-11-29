@@ -1,0 +1,57 @@
+//: Velocimetro de un automovil
+
+import UIKit
+
+enum Velocidades : Int {
+    case Apagado = 0, VelocidadBaja = 20, VelocidadMedia = 50, VelocidadAlta = 120
+    case VelocidadInicial
+    
+    init(VelocidadInicial : Velocidades){
+        self = .VelocidadInicial
+    }
+}
+
+class Auto{
+    var velocidad = Velocidades(VelocidadInicial : .Apagado)
+    
+    init (laVelocidad : Velocidades){
+        self.velocidad = laVelocidad
+    }
+    
+    func cambioDeVelocidad()->(actual  : Int, VelocidadEnCadena : String){
+        var velocidadEnCadena : String
+        
+        switch self.velocidad{
+        case Velocidades.Apagado:
+            self.velocidad = .VelocidadBaja
+            velocidadEnCadena = "Velocidad Baja"
+            
+        case Velocidades.VelocidadBaja:
+            self.velocidad = .VelocidadMedia
+            velocidadEnCadena = "Velocidad Media"
+            
+        case Velocidades.VelocidadMedia:
+            self.velocidad = .VelocidadAlta
+            velocidadEnCadena = "Velocidad Alta"
+            
+        case Velocidades.VelocidadAlta:
+            self.velocidad = .Apagado
+            velocidadEnCadena = "Apagado"
+            
+        default:
+            velocidadEnCadena = "Error"
+            
+        }
+        return (velocidad.rawValue, velocidadEnCadena)
+    }
+}
+
+
+var auto = Auto(laVelocidad: .Apagado)
+var iteraciones = 1...20
+for i in iteraciones{
+    print("\(i)." , auto.cambioDeVelocidad())
+
+}
+
+
